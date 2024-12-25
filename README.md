@@ -1,0 +1,1 @@
+# Localization-from-Database-ASP.NET-Core
