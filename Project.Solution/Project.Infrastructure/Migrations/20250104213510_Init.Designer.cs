@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Project.WebUI.Models.DataContexts;
+using Project.Infrastructure.Data;
 
 #nullable disable
 
-namespace Project.WebUI.Migrations
+namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(LocalizationDbContext))]
-    partial class LocalizationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250104213510_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Project.WebUI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Project.WebUI.Models.Entities.Language", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Language", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +51,7 @@ namespace Project.WebUI.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("Project.WebUI.Models.Entities.Resource", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Resource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +76,7 @@ namespace Project.WebUI.Migrations
                     b.ToTable("Resources");
                 });
 
-            modelBuilder.Entity("Project.WebUI.Models.Entities.Translation", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Translation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,15 +108,15 @@ namespace Project.WebUI.Migrations
                     b.ToTable("Translations");
                 });
 
-            modelBuilder.Entity("Project.WebUI.Models.Entities.Translation", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Translation", b =>
                 {
-                    b.HasOne("Project.WebUI.Models.Entities.Language", "Language")
+                    b.HasOne("Project.Domain.Entities.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project.WebUI.Models.Entities.Resource", "Resource")
+                    b.HasOne("Project.Domain.Entities.Resource", "Resource")
                         .WithMany()
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade)

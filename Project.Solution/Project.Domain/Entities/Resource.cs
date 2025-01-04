@@ -1,6 +1,7 @@
-﻿using Project.WebUI.Enums;
+﻿using Project.Domain.Common;
+using Project.Domain.Enums;
 
-namespace Project.WebUI.Models.Entities
+namespace Project.Domain.Entities
 {
     public class Resource : BaseEntity
     {

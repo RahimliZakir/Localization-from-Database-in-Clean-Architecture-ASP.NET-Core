@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Project.WebUI.Models.Entities
+namespace Project.Domain.Common
 {
     public class BaseEntity
     {

@@ -1,4 +1,6 @@
-﻿namespace Project.WebUI.Models.Entities
+﻿using Project.Domain.Common;
+
+namespace Project.Domain.Entities
 {
     public class Language : BaseEntity
     {

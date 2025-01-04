@@ -1,4 +1,4 @@
-﻿namespace Project.WebUI.Enums
+﻿namespace Project.Domain.Enums
 {
     public enum ApplicationType : byte
     {

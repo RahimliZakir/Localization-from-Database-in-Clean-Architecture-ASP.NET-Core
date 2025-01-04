@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.WebUI.Models.Entities;
-using System.Reflection;
+using Project.Domain.Common;
+using Project.Domain.Entities;
 
-namespace Project.WebUI.Models.DataContexts
+namespace Project.Infrastructure.Data
 {
     public class LocalizationDbContext(DbContextOptions options) : DbContext(options)
     {
@@ -14,7 +14,7 @@ namespace Project.WebUI.Models.DataContexts
         {
             base.OnModelCreating(builder);
 
-            foreach (Type? entity in Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(BaseEntity))))
+            foreach (Type? entity in typeof(BaseEntity).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(BaseEntity))))
             {
                 builder.Entity(entity).Property("CreatedDate").HasDefaultValueSql("GETDATE()");
             }
