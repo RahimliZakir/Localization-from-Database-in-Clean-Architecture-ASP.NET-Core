@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Domain.Common;
 using Project.Domain.Entities;
+using Project.Infrastructure.Data.Configurations;
 
 namespace Project.Infrastructure.Data
 {
@@ -14,10 +15,7 @@ namespace Project.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
-            foreach (Type? entity in typeof(BaseEntity).Assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(BaseEntity))))
-            {
-                builder.Entity(entity).Property("CreatedDate").HasDefaultValueSql("GETDATE()");
-            }
+            builder.ApplyGeneralConfigurations();
         }
     }
 }
