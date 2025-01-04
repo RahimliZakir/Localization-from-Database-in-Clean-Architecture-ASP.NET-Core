@@ -10,11 +10,11 @@ namespace Project.Infrastructure.Extensions
         {
             using AsyncServiceScope scope = app.ApplicationServices.CreateAsyncScope();
 
-            var initialiser = scope.ServiceProvider.GetRequiredService<LocalizationDatabaseInitializer>();
+            LocalizationDatabaseInitializer initializer = scope.ServiceProvider.GetRequiredService<LocalizationDatabaseInitializer>();
 
-            await initialiser.InitializeAsync();
+            await initializer.InitializeAsync();
 
-            await initialiser.SeedDataAsync();
+            await initializer.SeedDataAsync();
         }
     }
 }

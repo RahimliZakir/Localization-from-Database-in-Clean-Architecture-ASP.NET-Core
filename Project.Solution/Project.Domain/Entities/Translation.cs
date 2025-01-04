@@ -7,7 +7,7 @@ namespace Project.Domain.Entities
         public required string Name { get; set; }
         public int LanguageId { get; set; }
         public int ResourceId { get; set; }
-        public virtual Language? Language { get; set; }
-        public virtual Resource? Resource { get; set; }
+        public virtual Language Language { get; set; } = null!;
+        public virtual Resource Resource { get; set; } = null!;
     }
 }

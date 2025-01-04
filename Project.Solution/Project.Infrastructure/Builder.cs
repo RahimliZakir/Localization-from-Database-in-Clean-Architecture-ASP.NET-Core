@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Project.Application.Common.Interfaces.Services;
 using Project.Infrastructure.Data;
 using Project.Infrastructure.Extensions;
+using Project.Infrastructure.Services;
 
 namespace Project.Infrastructure
 {
@@ -21,6 +23,8 @@ namespace Project.Infrastructure
             });
 
             services.AddScoped<LocalizationDatabaseInitializer>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ILocalizationService, LocalizationService>();
         }
 
         async static public Task UseInfrastructureServices(this IApplicationBuilder app)
