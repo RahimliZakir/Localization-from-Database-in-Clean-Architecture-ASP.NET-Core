@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Domain.Common;
+using Project.Application.Common.Interfaces.Data;
 using Project.Domain.Entities;
 using Project.Infrastructure.Data.Configurations;
 
 namespace Project.Infrastructure.Data
 {
-    public class LocalizationDbContext(DbContextOptions options) : DbContext(options)
+    public class LocalizationDbContext(DbContextOptions options) : DbContext(options), ILocalizationDbContext
     {
         public DbSet<Language> Languages { get; set; }
         public DbSet<Resource> Resources { get; set; }
