@@ -1,1 +1,1 @@
-# Localization-from-Database-ASP.NET-Core
+# Localization-from-Database-in-Clean-Architecture-ASP.NET-Core
