@@ -2,17 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Project.Infrastructure.Data;
 using Project.Infrastructure.Extensions;
 
 namespace Project.Infrastructure
 {
-    public static class DependencyInjection
+    public static class Builder
     {
-        public static async Task AddInfrastructureServices(this WebApplicationBuilder builder)
+        public static void AddInfrastructureServices(this IHostApplicationBuilder builder)
         {
             IConfiguration conf = builder.Configuration;
-
             IServiceCollection services = builder.Services;
 
             services.AddDbContext<LocalizationDbContext>(cfg =>
@@ -23,10 +23,8 @@ namespace Project.Infrastructure
             services.AddScoped<LocalizationDatabaseInitializer>();
         }
 
-        public static async Task UseInfrastructureServices(this WebApplicationBuilder builder)
+        async static public Task UseInfrastructureServices(this IApplicationBuilder app)
         {
-            WebApplication app = builder.Build();
-
             await app.InitializeDatabaseAsync();
         }
     }
