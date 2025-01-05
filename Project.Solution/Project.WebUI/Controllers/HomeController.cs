@@ -6,11 +6,6 @@ namespace Project.WebUI.Controllers
     {
         public IActionResult Index()
         {
-            CookieOptions cookieOptions = new()
-            {
-                SameSite = SameSiteMode.Strict
-            };
-            Response.Cookies.Append("s", "alam", cookieOptions);
 
             return View();
         }

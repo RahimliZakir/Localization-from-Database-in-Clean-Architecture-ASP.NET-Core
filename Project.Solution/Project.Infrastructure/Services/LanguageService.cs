@@ -16,7 +16,7 @@ namespace Project.Infrastructure.Services
 
         async public Task<Language?> GetLanguageByCulture(string culture)
         {
-            return await db.Languages.FirstOrDefaultAsync(x => string.Equals(x.CultureInfo, culture, StringComparison.OrdinalIgnoreCase));
+            return await db.Languages.FirstOrDefaultAsync(x => string.Equals(x.Culture, culture, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

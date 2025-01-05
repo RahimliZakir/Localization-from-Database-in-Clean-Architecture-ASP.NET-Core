@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Project.Domain.Enums;
 
 namespace Project.Infrastructure.Data
 {
@@ -42,19 +43,45 @@ namespace Project.Infrastructure.Data
                 await db.Languages.AddAsync(new()
                 {
                     Name = "Azerbaijani",
-                    CultureInfo = "az-AZ"
+                    Abbr = "AZ",
+                    Culture = "az-AZ"
                 });
 
                 await db.Languages.AddAsync(new()
                 {
                     Name = "English",
-                    CultureInfo = "en-US"
+                    Abbr = "EN",
+                    Culture = "en-US"
                 });
 
                 await db.Languages.AddAsync(new()
                 {
                     Name = "Russian",
-                    CultureInfo = "ru-RU"
+                    Abbr = "RU",
+                    Culture = "ru-RU"
+                });
+
+                await db.SaveChangesAsync();
+            }
+
+            if (!await db.Resources.AnyAsync())
+            {
+                await db.Resources.AddAsync(new()
+                {
+                    ApplicationType = ApplicationType.MVCApp,
+                    Name = "welcome"
+                });
+
+                await db.Resources.AddAsync(new()
+                {
+                    ApplicationType = ApplicationType.MVCApp,
+                    Name = "home"
+                });
+
+                await db.Resources.AddAsync(new()
+                {
+                    ApplicationType = ApplicationType.MVCApp,
+                    Name = "contact"
                 });
 
                 await db.SaveChangesAsync();

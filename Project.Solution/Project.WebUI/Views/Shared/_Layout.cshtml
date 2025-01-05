@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Project.Application.Common.Interfaces.Services;
+@using Project.Domain.Entities;
+@inject ILanguageService languageService
+
+@{
+    IEnumerable<Language> languages = await languageService.GetLanguages();
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -20,7 +28,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
                     <div class="nav-item dropstart">
@@ -28,9 +36,10 @@
                             Dropdown
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">AZ</a></li>
-                            <li><a class="dropdown-item" href="#">EN</a></li>
-                            <li><a class="dropdown-item" href="#">RU</a></li>
+                            @foreach (Language language in languages)
+                            {
+                                <li><a class="dropdown-item" style="cursor: pointer;" data-culture="@language.Culture">@language.Abbr</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -43,8 +52,18 @@
     </main>
 
     <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/libs/js-cookie/js.cookie.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
 
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                  const culture = e.currentTarget.dataset.culture;
+                  Cookies.set('lang', culture, { expires: 7 });
+                });
+            });
+        });
     </script>
 </body>
 </html>

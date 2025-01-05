@@ -13,6 +13,10 @@
         "css/bootstrap.css",
         "css/bootstrap.min.css"
       ]
+    },
+    {
+      "library": "js-cookie@3.0.5",
+      "destination": "wwwroot/libs/js-cookie/"
     }
   ]
 }

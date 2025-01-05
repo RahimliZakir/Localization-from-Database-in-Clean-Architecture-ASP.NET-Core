@@ -3,7 +3,7 @@ using Project.Domain.Common;
 
 namespace Project.Infrastructure.Data.Configurations
 {
-    public static class BaseEntityConfiguration
+    public static class BaseEntityTypeConfiguration
     {
         public static void ApplyGeneralConfigurations(this ModelBuilder builder)
         {

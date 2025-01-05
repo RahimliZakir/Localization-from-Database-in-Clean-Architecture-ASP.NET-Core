@@ -2,6 +2,7 @@
 using Project.Application.Common.Interfaces.Data;
 using Project.Domain.Entities;
 using Project.Infrastructure.Data.Configurations;
+using System.Reflection;
 
 namespace Project.Infrastructure.Data
 {
@@ -16,6 +17,8 @@ namespace Project.Infrastructure.Data
             base.OnModelCreating(builder);
 
             builder.ApplyGeneralConfigurations();
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
