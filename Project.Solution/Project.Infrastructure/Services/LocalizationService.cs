@@ -9,12 +9,13 @@ namespace Project.Infrastructure.Services
     {
         readonly LocalizationDbContext db = db;
 
-        async public Task<Translation?> GetTranslation(string resourceKey, int languageId)
+        async public Task<string?> GetTranslation(string resourceKey, string languageCulture)
         {
             return await db.Translations
+                           .Include(x => x.Language)
                            .Include(x => x.Resource)
-                           .FirstOrDefaultAsync(x => string.Equals(x.Resource.Name, resourceKey, StringComparison.OrdinalIgnoreCase)
-                                                && x.LanguageId == languageId);
+                           .FirstOrDefaultAsync(x => string.Equals(x.Resource.Value, resourceKey, StringComparison.OrdinalIgnoreCase)
+                                                && string.Equals(x.Language.Culture, languageCulture, StringComparison.OrdinalIgnoreCase)) is Translation translation ? translation.Value : null;
         }
     }
 }

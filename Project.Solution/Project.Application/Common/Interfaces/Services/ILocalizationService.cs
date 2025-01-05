@@ -4,6 +4,6 @@ namespace Project.Application.Common.Interfaces.Services
 {
     public interface ILocalizationService
     {
-        Task<Translation?> GetTranslation(string resourceKey, int languageId);
+        Task<string?> GetTranslation(string resourceKey, string languageCulture);
     }
 }

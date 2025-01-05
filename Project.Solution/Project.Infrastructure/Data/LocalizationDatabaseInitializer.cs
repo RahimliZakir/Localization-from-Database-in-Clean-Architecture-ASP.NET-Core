@@ -69,19 +69,19 @@ namespace Project.Infrastructure.Data
                 await db.Resources.AddAsync(new()
                 {
                     ApplicationType = ApplicationType.MVCApp,
-                    Name = "welcome"
+                    Value = "welcome"
                 });
 
                 await db.Resources.AddAsync(new()
                 {
                     ApplicationType = ApplicationType.MVCApp,
-                    Name = "home"
+                    Value = "home"
                 });
 
                 await db.Resources.AddAsync(new()
                 {
                     ApplicationType = ApplicationType.MVCApp,
-                    Name = "contact"
+                    Value = "contact"
                 });
 
                 await db.SaveChangesAsync();
