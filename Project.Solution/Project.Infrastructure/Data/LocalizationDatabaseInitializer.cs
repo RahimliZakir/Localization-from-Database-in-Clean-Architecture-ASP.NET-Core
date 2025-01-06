@@ -13,7 +13,6 @@ namespace Project.Infrastructure.Data
         {
             try
             {
-                await db.Database.EnsureCreatedAsync();
                 await db.Database.MigrateAsync();
             }
             catch (Exception ex)

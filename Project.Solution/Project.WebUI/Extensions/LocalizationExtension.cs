@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Project.Application.Common.Interfaces.Services;
+﻿using Project.Application.Common.Interfaces.Services;
 
 namespace Project.WebUI.Extensions
 {
-    public class LocalizationHelper(IActionContextAccessor ctx, ILocalizationService localizationService)
+    public static partial class Extension
     {
-        readonly IActionContextAccessor ctx = ctx;
-        readonly ILocalizationService localizationService = localizationService;
-
-        async public Task<string?> Translate(string text)
+        async static public Task<string?> Translate(this HttpContext httpContext, string text)
         {
-            bool result = ctx.ActionContext.HttpContext.Request.Cookies.TryGetValue("lang", out string langCultureCookie);
+            using AsyncServiceScope scope = httpContext.RequestServices.CreateAsyncScope();
+            ILocalizationService localizationService = scope.ServiceProvider.GetRequiredService<ILocalizationService>();
+            bool result = httpContext.Request.Cookies.TryGetValue("lang", out string langCultureCookie);
 
-            return await localizationService.GetTranslation(text, result ? langCultureCookie : string.Empty);
+            return await localizationService.GetTranslation(text, result ? langCultureCookie : null);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Project.Application.Common.Interfaces.Services;
 using Project.Infrastructure.Data;
 using Project.Infrastructure.Extensions;
@@ -12,11 +11,8 @@ namespace Project.Infrastructure
 {
     public static class Builder
     {
-        public static void AddInfrastructureServices(this IHostApplicationBuilder builder)
+        public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration conf)
         {
-            IConfiguration conf = builder.Configuration;
-            IServiceCollection services = builder.Services;
-
             services.AddDbContext<LocalizationDbContext>(cfg =>
             {
                 cfg.UseSqlServer(conf.GetConnectionString("cString"));

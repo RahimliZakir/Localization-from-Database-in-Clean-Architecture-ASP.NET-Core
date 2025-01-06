@@ -10,11 +10,8 @@ namespace Project.WebUI
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
-        public static void UseWebServices(this WebApplicationBuilder builder)
+        public static void UseWebServices(this WebApplication app, IWebHostEnvironment env)
         {
-            IWebHostEnvironment env = builder.Environment;
-            WebApplication app = builder.Build();
-
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
