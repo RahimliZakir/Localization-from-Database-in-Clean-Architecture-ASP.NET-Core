@@ -85,6 +85,32 @@ namespace Project.Infrastructure.Data
 
                 await db.SaveChangesAsync();
             }
+
+            if (!await db.Translations.AnyAsync())
+            {
+                await db.Translations.AddAsync(new()
+                {
+                    LanguageId = 1,
+                    ResourceId = 1,
+                    Value = "Xoş gəlmişsiniz!"
+                });
+
+                await db.Translations.AddAsync(new()
+                {
+                    LanguageId = 2,
+                    ResourceId = 1,
+                    Value = "Welcome!"
+                });
+
+                await db.Translations.AddAsync(new()
+                {
+                    LanguageId = 3,
+                    ResourceId = 1,
+                    Value = "Добро пожаловать!"
+                });
+
+                await db.SaveChangesAsync();
+            }
         }
     }
 }

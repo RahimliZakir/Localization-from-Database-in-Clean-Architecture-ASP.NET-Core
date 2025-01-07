@@ -11,11 +11,18 @@ namespace Project.Infrastructure.Services
 
         async public Task<string?> GetTranslation(string resourceKey, string languageCulture)
         {
+            var d = await db.Translations.FirstOrDefaultAsync();
+            var s = await db.Translations
+                           .Include(x => x.Language)
+                           .Include(x => x.Resource)
+                           .FirstOrDefaultAsync(x => x.Resource.Value.Equals(resourceKey)
+                                                && x.Language.Culture.Equals(languageCulture));
+
             return await db.Translations
                            .Include(x => x.Language)
                            .Include(x => x.Resource)
-                           .FirstOrDefaultAsync(x => string.Equals(x.Resource.Value, resourceKey, StringComparison.OrdinalIgnoreCase)
-                                                && string.Equals(x.Language.Culture, languageCulture, StringComparison.OrdinalIgnoreCase)) is Translation translation ? translation.Value : null;
+                           .FirstOrDefaultAsync(x => string.Equals(x.Resource.Value, resourceKey)
+                                                && string.Equals(x.Language.Culture, languageCulture)) is Translation translation ? translation.Value : null;
         }
     }
 }
